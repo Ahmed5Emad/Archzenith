@@ -30,7 +30,6 @@
 <div align="center">
 
 ![Overview](https://raw.githubusercontent.com/AymanLyesri/ArchEclipse/refs/heads/master/.github/assets/overview.png)
-
 </div>
 
 ---
@@ -73,7 +72,6 @@
 | 🔐 **Bluetooth** | [Blueman](https://github.com/blueman-project/blueman) | Complete Bluetooth adapter daemon & device manager interface |
 | 📡 **Network** | [NetworkManager](https://networkmanager.dev/) + `nm-applet` | Robust network daemon with lightweight panel indicator applet |
 | 🔑 **Auth Agent** | [Hyprpolkitagent](https://github.com/hyprwm/hyprpolkitagent) | Native Hyprland policy kit integration framework |
-| ✏️ **Typography** | JetBrains Mono Nerd Font | Outstanding design typography coupled with high-density Noto Emoji |
 | 🖱️ **Cursors** | [Phinger Cursors](https://github.com/phisch/phinger-cursors) | Modern, highly visible crosshair & standard icon sets |
 
 ---
@@ -87,7 +85,7 @@ The premium installer breaks setup down into **7 modular sections**, allowing yo
 3. **Shell & System Utilities** — Fish shell, Starship prompt, btop, fastfetch, jq, bat, socat, and custom plugins.
 4. **Hardware & Media Control** — Pipewire audio backend, Blueman bluetooth suite, NetworkManager integration, and device keys.
 5. **Media Playback** — VLC media player layers.
-6. **Look & Feel Theme Layers** — SDDM themes, JetBrains font, material-you core engine, and Qt5/Qt6 compatibility.
+6. **Look & Feel Theme Layers** — SDDM themes,material-you core engine, and Qt5/Qt6 compatibility.
 7. **Compilation Tools** — Essential build utilities including cmake, meson, gcc, cpio, and helper bundles.
 
 ---
