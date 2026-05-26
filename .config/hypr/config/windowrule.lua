@@ -1,5 +1,5 @@
 hl.window_rule({
-    match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" },
+    match = { class = "^(polkit-gnome-authentication-agent-1)$" },
     float = true,
 })
 

@@ -145,8 +145,8 @@ check_aur_helper
 
 # Define package arrays for the 7 Sections
 sec1_pkgs=("aylurs-gtk-shell-git" "gst-libav" "libastal-meta" "dart-sass" "sassc")
-sec2_pkgs=("hyprland" "hyprcursor" "hyprlock" "hyprpaper" "hyprpolkitagent")
-sec3_pkgs=("fish" "starship" "btop" "fastfetch" "translate-shell" "bat" "lsd" )
+sec2_pkgs=("hyprland" "hyprcursor" "hyprlock" "hyprpaper")
+sec3_pkgs=("fish" "starship" "btop" "fastfetch" "translate-shell" "polkit-gnome" "bat" "lsd" )
 sec4_pkgs=("pipewire" "pamixer" "pavucontrol" "playerctl" "brightnessctl" "bluez" "bluez-utils" "blueman" "network-manager-applet" "networkmanager")
 sec5_pkgs=("vlc" "noise-suppression-for-voice")
 sec6_pkgs=("sddm" "gtk4" "kde-material-you-colors" "qt5ct" "qt6ct" "cwal" "lolcat")
