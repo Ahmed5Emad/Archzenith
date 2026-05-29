@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-import os
 import json
-import math
 import colorsys
 import subprocess
-import shutil
 from pathlib import Path
 
 # Paths
@@ -93,39 +90,44 @@ def is_dark_mode():
 
 
 def apply_kde_window_colors(hex_color, dark):
-    mode_flag = "-d" if dark else "-l"
+    """Apply KDE Material You colors via direct library call — no subprocess overhead."""
     try:
-        # Check standard PATH first
-        bin_path = shutil.which("kde-material-you-colors")
+        import argparse
+        from kde_material_you_colors import settings
+        from kde_material_you_colors.config import Configs
+        from kde_material_you_colors.utils import wallpaper_utils
+        from kde_material_you_colors import apply_themes
 
-        # Check ~/.local/bin fallback explicitly
-        if not bin_path:
-            local_bin = Path.home() / ".local" / "bin" / "kde-material-you-colors"
-            if local_bin.exists() and os.access(local_bin, os.X_OK):
-                bin_path = str(local_bin)
-
-        if bin_path:
-            print(f"✔ Running {bin_path} with color {hex_color} in background...")
-            # We override the seed color to match our active cwal theme color exactly
-            # We run it in background because it is designed to run as an infinite monitoring daemon.
-            proc = subprocess.Popen(
-                [bin_path, mode_flag, "--color", hex_color],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL
-            )
-            import time
-            time.sleep(2.5)  # Give it time to fully apply the theme
-            proc.terminate()
-            try:
-                proc.wait(timeout=1.0)
-            except subprocess.TimeoutExpired:
-                proc.kill()
-
-            print("✔ Dynamic window colors applied to KDE/Qt apps.")
-        else:
-            print("⚠ kde-material-you-colors binary is not found in PATH or ~/.local/bin/ yet. Skipping window color generation.")
+        ns = argparse.Namespace(
+            dark=dark, light=not dark, pywal=False,
+            pywaldark=None, pywallight=None,
+            color=hex_color, file=None, monitor=None, ncolor=None,
+            iconslight=None, iconsdark=None,
+            lbmultiplier=None, dbmultiplier=None,
+            on_change_hook=None, sierra_breeze_buttons_color=None,
+            disable_konsole=None, titlebar_opacity=None,
+            titlebar_opacity_dark=None, titlebar_opacity_override=None,
+            toolbar_opacity=None, toolbar_opacity_dark=None,
+            konsole_opacity=None, konsole_opacity_dark=None,
+            konsole_blur=None, klassy_windeco_outline=None,
+            custom_colors_list=None, darker_window_list=None,
+            use_startup_delay=None, startup_delay=None,
+            main_loop_delay=None, screenshot_delay=None,
+            once_after_change=None, screenshot_only_mode=None,
+            scheme_variant=None, chroma_multiplier=None,
+            tone_multiplier=None, frame_contrast=None,
+            contrast_level=None, qdbus_executable=None,
+            manual_fetch=None, spec_version=None,
+            kde_rounded_corners_effect_outline=None,
+        )
+        config = Configs(ns, settings.USER_CONFIG_PATH + settings.CONFIG_FILE)
+        wallpaper = wallpaper_utils.WallpaperReader(config)
+        apply_themes.apply(config, wallpaper, not dark)
+        print(f"✔ Applied KDE Material You colors for {hex_color}")
+    except ImportError:
+        print("⚠ kde_material_you_colors package not installed. Skipping KDE color generation.")
     except Exception as e:
-        print(f"⚠ Failed to apply dynamic KDE window colors: {e}")
+        print(f"⚠ Failed to apply KDE Material You colors: {e}")
 
 
 def apply_gtk_icon_theme(theme_name):
@@ -246,12 +248,12 @@ def main():
 
     print(f"Wallpaper color: {hex_color} -> Mapped to Tela Variant: {variant}")
 
-    # Generate KDE window colors via Material You (contrast-compliant accents)
-    apply_kde_window_colors(hex_color, dark)
-
-    # Apply icons (ensures our custom Tela color-matched icons aren't overwritten)
+    # Apply icons FIRST — fast, no blocking
     apply_gtk_icon_theme(target_theme)
     apply_kde_icon_theme(target_theme)
+
+    # Generate KDE window colors in background (detached, no wait)
+    apply_kde_window_colors(hex_color, dark)
 
 
 if __name__ == "__main__":
