@@ -1,12 +1,15 @@
 .game-launcher-panel {
   .game-launcher-panel-content {
     @include module;
+
     padding: 0;
+
   }
 
   .game-launcher-panel-header {
     @include module;
-    margin: 5px;
+    margin: 5px 10px;
+    background: $background-semi-transparent;
 
     .game-launcher-panel-status {
       color: $foreground-tertiary;
@@ -16,20 +19,21 @@
     button {
       min-width: 30px;
       min-height: 30px;
-      padding: 0;
+    padding: 5px;
     }
   }
 
   .game-launcher-panel-search {
     @include module;
-    margin: 0 5px 5px 5px;
+    margin: 5px 10px;
+    background: $background-semi-transparent;
   }
 
   .game-launcher-panel-item {
     @include module;
     padding: 5px;
-    margin: 2px 5px;
-    background: transparent;
+    margin: 2px 0;
+    background: $background-semi-transparent;
 
     &:hover {
       background: $background;
@@ -37,7 +41,6 @@
 
     &.checked {
       background: $color2;
-      color: $background;
     }
 
     .game-launcher-panel-cover {

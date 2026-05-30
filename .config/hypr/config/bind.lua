@@ -50,6 +50,8 @@ hl.bind(mainMod .. " + CTRL + T", hl.dsp.exec_cmd("[float] " .. terminal))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 -- # open dolphin/file manager
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("env QT_STYLE_OVERRIDE=\"\" QT_QPA_PLATFORMTHEME=kde XDG_MENU_PREFIX=plasma- dolphin"))
+-- # open handy
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("handy --toggle-transcription"))
 -- # open btop in workspace 5
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("[workspace 5] " .. terminal .. " btop"))
 

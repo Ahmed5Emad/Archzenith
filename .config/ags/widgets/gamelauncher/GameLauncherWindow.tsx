@@ -119,7 +119,7 @@ export default ({
         class="game-launcher-panel-content"
         orientation={Gtk.Orientation.VERTICAL}
         spacing={0}
-        widthRequest={500}
+        widthRequest={450}
         $={(self) => { panelContainer = self; }}
       >
         <box class="game-launcher-panel-header" spacing={10}>

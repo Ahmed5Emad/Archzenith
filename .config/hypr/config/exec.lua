@@ -8,7 +8,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME QT_STYLE_OVERRIDE XDG_MENU_PREFIX")
     -- Restart portals so they inherit the updated clean variables (fixes Kvantum module error in KDE portals)
     hl.exec_cmd("systemctl --user restart xdg-desktop-portal xdg-desktop-portal-hyprland plasma-xdg-desktop-portal-kde xdg-desktop-portal-gtk &")
-
+    hl.exec_cmd(scriptsDir .. "./Alsa.sh")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd(scriptsDir .. "/compile-run-binaries.sh")
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &")
